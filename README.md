@@ -1,4 +1,4 @@
-# Mapper Utility for Projection Mapping
+# Sync Controller for Projection Mapping
 
 Let's play Projection Mapping! :smile:
 
