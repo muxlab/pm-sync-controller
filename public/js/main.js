@@ -1,10 +1,12 @@
 // Reference to my Firebase
 var myFirebaseRef = new Firebase('https://torrid-inferno-1243.firebaseio.com/');
 
+// Grobal
 var map;
 
 console.log('%c⚛ Projection Mapping Tool: Hello geohacker! ⚛', 'font-family:monospace;font-size:16px;color:darkblue;');
 
+// Button event listner for highlight
 $('.button').on('click', function(e) {
   console.log(e.target.id);
   var button = $('#' + e.target.id);
@@ -14,6 +16,7 @@ $('.button').on('click', function(e) {
   }, 200);
 });
 
+// Create GeoJSON layer and add into map
 function createGeoJSONLayer(url) {
   var markerIcon = L.divIcon({
     className: 'svg-marker-icon',
@@ -45,7 +48,7 @@ function createGeoJSONLayer(url) {
   });
 }
 
-// Leaflet Map Init
+// Init
 function initMap() {
   var dataUrl = 'https://muxlab.github.io/map-effects-100/data/japan.geojson';
   var center = [35.8, 139];
@@ -58,6 +61,7 @@ function initMap() {
     id: 'osm'
   }).addTo(map);
 
+  // Sync map position
   map.on('moveend', function(e) {
     console.log(map.getCenter(), map.getZoom());
     var currentCenter = map.getCenter();
@@ -73,6 +77,7 @@ function initMap() {
     });
   });
 
+  // Flash 1
   $('#flash1').on('click', function(e) {
     var currentCenter = map.getCenter();
     var currentZoom = map.getZoom();
@@ -96,6 +101,7 @@ function initMap() {
     });
   });
 
+  // Flash 2
   $('#flash2').on('click', function(e) {
     var currentCenter = map.getCenter();
     var currentZoom = map.getZoom();
@@ -119,6 +125,7 @@ function initMap() {
     });
   });
 
+  // Data import
   $('#import').on('click', function(e) {
     var currentCenter = map.getCenter();
     var currentZoom = map.getZoom();
