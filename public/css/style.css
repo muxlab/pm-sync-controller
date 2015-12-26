@@ -11,14 +11,15 @@
   color: #fff;
   background: rgba(0,0,0,.75);
   border: 1px solid rgba(255,255,255,.9);;
-  height: 30px;
-  line-height: 30px;
+  height: 60px;
+  line-height: 60px;
   padding-left: 32px;
   padding-right: 32px;
   transition: all, .4s;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
+  font-size: 1.5em;
 }
 
 /* Form */
@@ -29,12 +30,14 @@
   z-index: 999;
 }
 .form-control {
-  height: 30px;
-  width: 250px;
+  height: 60px;
+  width: 650px;
+  font-size: 1.5em;
 }
 
 /* Map */
 .l-map {
+  position: fixed;
   height: 100%;
   width: 100%;
 }
