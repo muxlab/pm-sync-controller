@@ -92,4 +92,4 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 
-app.listen(3100);
+app.listen(80);
