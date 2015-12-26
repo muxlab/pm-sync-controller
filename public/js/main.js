@@ -1,13 +1,56 @@
 // Reference to my Firebase
 var myFirebaseRef = new Firebase('https://torrid-inferno-1243.firebaseio.com/');
 
+var map;
+
 console.log('%c⚛ Projection Mapping Tool: Hello geohacker! ⚛', 'font-family:monospace;font-size:16px;color:darkblue;');
+
+$('.button').on('click', function(e) {
+  console.log(e.target.id);
+  var button = $('#' + e.target.id);
+  button.css('background', 'rgba(255,255,255,.75)');
+  setTimeout(function() {
+    button.css('background', 'rgba(0,0,0,.75)');
+  }, 200);
+});
+
+function createGeoJSONLayer(url) {
+  var markerIcon = L.divIcon({
+    className: 'svg-marker-icon',
+    html: '<svg width="64px" height="64px" viewBox="-20 -20 64 64"><g><circle class="circles" opacity="0.4" r="6" transform="translate(0,0)"></circle></g></svg>'
+  });
+  var pathStyle = {
+    color: '#ff6500',
+    weight: 1,
+    opacity: 0.8,
+    fillOpacity: 0.35,
+    fillColor: '#ff6500'
+  };
+  $.getJSON(url, function(data) {
+    var geojson = L.geoJson(data, {
+      onEachFeature: function(feature, layer) {
+        console.log(layer.feature.geometry.type);
+        if(layer.feature.geometry.type === 'Polygon' || layer.feature.geometry.type === 'MultiPolygon' || layer.feature.geometry.type === 'Polyline') {
+          layer.setStyle(pathStyle);
+        }
+        else if(layer.feature.geometry.type === 'Point' || layer.feature.geometry.type === 'MultiPoint') {
+          layer.setIcon(markerIcon);
+        }
+        else {
+          return false;
+        }
+      }
+    });
+    geojson.addTo(map);
+  });
+}
 
 // Leaflet Map Init
 function initMap() {
+  var dataUrl = 'https://muxlab.github.io/map-effects-100/data/japan.geojson';
   var center = [35.8, 139];
   var zoom = 4;
-  var map = L.map('l-map', { zoomControl: false, attributionControl: false }).setView(center, zoom);
+  map = L.map('l-map', { zoomControl: false, attributionControl: false }).setView(center, zoom);
   L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -20,26 +63,76 @@ function initMap() {
     var currentCenter = map.getCenter();
     var currentZoom = map.getZoom();
     myFirebaseRef.set({
-      title: 'sync map!',
-      author: 'ynunokawa',
       map: {
         center: [currentCenter.lat, currentCenter.lng],
         zoom: currentZoom
-      }
+      },
+      flash1: false,
+      flash2: false,
+      dataUrl: dataUrl
     });
   });
 
-  /*myFirebaseRef.child('map/center').on('value', function(snapshot) {
-    center = snapshot.val();
-    map1.setView(center, zoom);
-    map2.setView(center, zoom);
-    map3.setView(center, zoom);
+  $('#flash1').on('click', function(e) {
+    var currentCenter = map.getCenter();
+    var currentZoom = map.getZoom();
+    myFirebaseRef.set({
+      map: {
+        center: [currentCenter.lat, currentCenter.lng],
+        zoom: currentZoom
+      },
+      flash1: true,
+      flash2: false,
+      dataUrl: dataUrl
+    });
+    myFirebaseRef.set({
+      map: {
+        center: [currentCenter.lat, currentCenter.lng],
+        zoom: currentZoom
+      },
+      flash1: false,
+      flash2: false,
+      dataUrl: dataUrl
+    });
   });
-  myFirebaseRef.child('map/zoom').on('value', function(snapshot) {
-    zoom = snapshot.val();
-    map1.setView(center, zoom);
-    map2.setView(center, zoom);
-    map3.setView(center, zoom);
-  });*/
+
+  $('#flash2').on('click', function(e) {
+    var currentCenter = map.getCenter();
+    var currentZoom = map.getZoom();
+    myFirebaseRef.set({
+      map: {
+        center: [currentCenter.lat, currentCenter.lng],
+        zoom: currentZoom
+      },
+      flash1: false,
+      flash2: true,
+      dataUrl: dataUrl
+    });
+    myFirebaseRef.set({
+      map: {
+        center: [currentCenter.lat, currentCenter.lng],
+        zoom: currentZoom
+      },
+      flash1: false,
+      flash2: false,
+      dataUrl: dataUrl
+    });
+  });
+
+  $('#import').on('click', function(e) {
+    var currentCenter = map.getCenter();
+    var currentZoom = map.getZoom();
+    dataUrl = $('#geojson-url').val();
+    createGeoJSONLayer(dataUrl);
+    myFirebaseRef.set({
+      map: {
+        center: [currentCenter.lat, currentCenter.lng],
+        zoom: currentZoom
+      },
+      flash1: false,
+      flash2: false,
+      dataUrl: dataUrl
+    });
+  });
 }
 initMap();

@@ -1,32 +1,43 @@
-html, body {
-  background: rgb(0,0,0);
-}
-
-
-.l-map {
-  height: 300px;
-  width: 300px;
-}
-#l-map1 {
-  position: relative;
-  left: 0;
-}
-#l-map2 {
-  position: relative;
-  left: 300px;
-}
-#l-map3 {
-  position: relative;
-  left: 600px;
-}
-.avatar {
-  position: relative;
+/* Buttons */
+#button-container {
+  position: absolute;
   bottom: 0;
-  height: 460px;
+  z-index: 999;
 }
-.avatar img {
-  display: block;
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
+.button {
+  display: inline-block;
+  text-decoration: none;
+  font-family: "Avenir LT W01 35 Light", "Century Gothic", Helvetica, Arial, sans-serif;
+  color: #fff;
+  background: rgba(0,0,0,.75);
+  border: 1px solid rgba(255,255,255,.9);;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 32px;
+  padding-right: 32px;
+  transition: all, .4s;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+/* Form */
+#form-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 999;
+}
+.form-control {
+  height: 30px;
+  width: 250px;
+}
+
+/* Map */
+.l-map {
+  height: 100%;
+  width: 100%;
+}
+.circles {
+  fill: #ff9c00;
 }

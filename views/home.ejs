@@ -1,15 +1,25 @@
-<% if (!user) { %>
+<!--<% if (!user) { %>
 	<p>Welcome! Please <a href="/login/twitter">log in</a>.</p>
 <% } else { %>
 	<p>Hello, <%= user.username %>. View your <a href="/profile">profile</a>.</p>
-<% } %>
+<% } %>-->
+
+<div id="button-container">
+	<a href="#" id="flash1" class="button">Flash1</a>
+	<a href="#" id="flash2" class="button">Flash2</a>
+</div>
+
+<div id="form-container">
+	<input type="text" id="geojson-url" class="form-control" placeholder="GeoJSON URL">
+	<a href="#" id="import" class="button">Import</a>
+</div>
 
 <div id="l-map" class="l-map"></div>
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
-<link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css" />
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 <script src="js/main.js"></script>
