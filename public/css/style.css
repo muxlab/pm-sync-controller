@@ -36,8 +36,7 @@
 }
 
 /* Map */
-.l-map {
-  position: fixed;
+html, body, .l-map {
   height: 100%;
   width: 100%;
 }
