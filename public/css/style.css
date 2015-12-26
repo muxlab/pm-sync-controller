@@ -35,6 +35,20 @@
   font-size: 1.5em;
 }
 
+/* View Area */
+#view-area {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  z-index: 999;
+  border: 1px solid rgba(255,0,0,.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
 /* Map */
 html, body, .l-map {
   height: 100%;
