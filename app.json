@@ -1,0 +1,7 @@
+{
+  "name": "Mapper Utility for Projection Mapping",
+  "description": "Mapper Utility for Projection Mapping",
+  "repository": "https://github.com/muxlab/pm-sync-controller",
+  "logo": "https://avatars2.githubusercontent.com/u/15722295?v=3&s=200",
+  "keywords": ["projection mapping", "firebase", "leaflet"]
+}
